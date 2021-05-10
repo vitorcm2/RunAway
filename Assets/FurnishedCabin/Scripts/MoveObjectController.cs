@@ -18,11 +18,13 @@ public class MoveObjectController : MonoBehaviour
 
 	private int rayLayerMask; 
 
+	GameManager gm;
 
 	void Start()
 	{
 		//Initialize moveDrawController if script is enabled.
 		player = GameObject.FindGameObjectWithTag("Player");
+		gm = GameManager.GetInstance();
 
 		fpsCam = Camera.main;
 		if (fpsCam == null)	//a reference to Camera is required for rayasts
@@ -91,11 +93,27 @@ public class MoveObjectController : MonoBehaviour
 					bool isOpen = anim.GetBool(animBoolNameNum);	//need current state for message.
 					msg = getGuiMsg(isOpen);
 
-					if (Input.GetKeyUp(KeyCode.E) || Input.GetButtonDown("Fire1"))
+					if(hit.collider.name == "DoorSingle"){
+						if( gm.ChaveQuarto){
+							Debug.Log("TESTANDO");
+							if (Input.GetKeyUp(KeyCode.E))
+							{
+								anim.enabled = true;
+								anim.SetBool(animBoolNameNum,!isOpen);
+								gm.AudioDoor = true;
+								msg = getGuiMsg(!isOpen);
+							}
+						}
+
+					} else{
+
+					if (Input.GetKeyUp(KeyCode.E))
 					{
 						anim.enabled = true;
 						anim.SetBool(animBoolNameNum,!isOpen);
+						gm.AudioDoor = true;
 						msg = getGuiMsg(!isOpen);
+					}
 					}
 
 				}
@@ -154,7 +172,7 @@ public class MoveObjectController : MonoBehaviour
 		guiStyle.fontSize = 16;
 		guiStyle.fontStyle = FontStyle.Bold;
 		guiStyle.normal.textColor = Color.white;
-		msg = "Press E/Fire1 to Open";
+		msg = "Press E to Open";
 	}
 
 	private string getGuiMsg(bool isOpen)
@@ -162,10 +180,10 @@ public class MoveObjectController : MonoBehaviour
 		string rtnVal;
 		if (isOpen)
 		{
-			rtnVal = "Press E/Fire1 to Close";
+			rtnVal = "Press E to Close";
 		}else
 		{
-			rtnVal = "Press E/Fire1 to Open";
+			rtnVal = "Press E to Open";
 		}
 
 		return rtnVal;
