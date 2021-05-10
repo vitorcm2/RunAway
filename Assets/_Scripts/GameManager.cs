@@ -6,10 +6,10 @@ public class GameManager
 {
    private static GameManager _instance;
 
-   public enum GameState { MENU, GAME, PAUSE, ENDGAME, INSTRUCTION, CONFIG, LIVRO1 };
+   public enum GameState { MENU, GAME, PAUSE, ENDGAME, INSTRUCTION, CONFIG, LIVRO1, LIVRO2, FECHADURA };
 
    public GameState gameState { get; private set; }
-   public bool AudioDoor, ChaveQuarto;
+   public bool AudioDoor, ChaveQuarto, fechadura, saida;
 
    public delegate void ChangeStateDelegate();
     public static ChangeStateDelegate changeStateDelegate;
@@ -29,6 +29,8 @@ public class GameManager
        gameState = GameState.MENU;
        AudioDoor = false;
        ChaveQuarto = false;
+       fechadura = false;
+       saida = false;
    }
    
 public void ChangeState(GameState nextState)

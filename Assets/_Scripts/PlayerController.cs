@@ -108,12 +108,29 @@ public class PlayerController : MonoBehaviour
 						gm.ChangeState(GameManager.GameState.LIVRO1);
 					}
         }
+        if (hit.collider.name == "Notepad2"){
+            if (Input.GetKeyUp(KeyCode.E))
+					{
+						gm.ChangeState(GameManager.GameState.LIVRO2);
+					}
+        }
+        if (hit.collider.name == "Fechadura"){
+            if (Input.GetKeyUp(KeyCode.E))
+					{
+						gm.ChangeState(GameManager.GameState.FECHADURA);
+					}
+        }
         if (hit.collider.name == "key_silver"){
-            Debug.Log("CHAVEE");
             if (Input.GetKeyUp(KeyCode.G))
 					{
-                        Debug.Log("Peguei a chave");
 						gm.ChaveQuarto = true;
+                        Destroy(hit.transform.gameObject);
+					}
+        }
+        if (hit.collider.name == "key_silver2"){
+            if (Input.GetKeyUp(KeyCode.G))
+					{
+						gm.saida = true;
                         Destroy(hit.transform.gameObject);
 					}
         }

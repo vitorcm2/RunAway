@@ -7,6 +7,11 @@ TagManager:
   - LivroInicial
   - ChaveQuarto
   - PortaQuarto
+  - Livro2
+  - Fechadura
+  - Porta2
+  - ChavePrincipal
+  - PortaFinal
   layers:
   - Default
   - TransparentFX

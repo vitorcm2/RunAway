@@ -94,18 +94,45 @@ public class MoveObjectController : MonoBehaviour
 					msg = getGuiMsg(isOpen);
 
 					if(hit.collider.name == "DoorSingle"){
-						if( gm.ChaveQuarto){
-							Debug.Log("TESTANDO");
+						if(hit.collider.tag == "PortaQuarto"){
+
+							if( gm.ChaveQuarto){
+								if (Input.GetKeyUp(KeyCode.E))
+								{
+									anim.enabled = true;
+									anim.SetBool(animBoolNameNum,!isOpen);
+									gm.AudioDoor = true;
+									msg = getGuiMsg(!isOpen);
+								}
+							}}
+						if(hit.collider.tag == "Porta2"){
+
+							if( gm.fechadura){
+								if (Input.GetKeyUp(KeyCode.E))
+								{
+									anim.enabled = true;
+									anim.SetBool(animBoolNameNum,!isOpen);
+									gm.AudioDoor = true;
+									msg = getGuiMsg(!isOpen);
+								}
+							}}
+
+					} else if (hit.collider.tag == "PortaFinal"){
+
+						if(gm.saida){
 							if (Input.GetKeyUp(KeyCode.E))
-							{
-								anim.enabled = true;
-								anim.SetBool(animBoolNameNum,!isOpen);
-								gm.AudioDoor = true;
-								msg = getGuiMsg(!isOpen);
-							}
+								{
+									anim.enabled = true;
+									anim.SetBool(animBoolNameNum,!isOpen);
+									gm.AudioDoor = true;
+									msg = getGuiMsg(!isOpen);
+
+									new WaitForSeconds(15);
+									gm.ChangeState(GameManager.GameState.ENDGAME);
+								}
 						}
 
-					} else{
+					}	else{
 
 					if (Input.GetKeyUp(KeyCode.E))
 					{
